@@ -1,23 +1,30 @@
+import { useState } from "react";
+import ImageInput from "./Components/ImageInput/ImageInput";
+import Loader from "./Components/Common/Loader";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ImgPreview from "./Components/ImgPreview";
 import TextDisplay from "./Components/TextDisplay";
-import { useState } from "react";
-import ImageInput from "./Components/ImageInput/ImageInput";
-import Loader from "./Components/Common/Loader";
 
 function App() {
   const [previewUrl, setPreviewUrl] = useState<string | ArrayBuffer | null>(
     null
   );
   const [loading, setLoading] = useState(false);
+
   const [text, setText] = useState("");
   return (
     <div>
       <ToastContainer position="bottom-right" />
 
       <Loader loading={loading} />
-      <ImageInput loading={loading} setLoading={setLoading} />
+      <ImageInput
+        loading={loading}
+        setLoading={setLoading}
+        setPreviewUrl={setPreviewUrl}
+        setText={setText}
+      />
+
       <div
         style={{
           display: "grid",
