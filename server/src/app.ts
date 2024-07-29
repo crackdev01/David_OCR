@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import rateLimit from "express-rate-limit";
 import helmet from "helmet";
 import ocrRouter from "./Routes/ocr";
 
@@ -13,6 +14,18 @@ app.use(helmet());
 
 // Parse incoming JSON requests with a size limit of 50MB
 app.use(express.json({ limit: "50mb" }));
+
+// Apply rate limiting to all requests
+app.use(
+  rateLimit({
+    windowMs: 1 * 60 * 1000, // 1 minute window
+    max: 5, // limit each IP to 5 requests per windowMs
+    message: {
+      error:
+        "Oops! It seems you’re making too many requests in a short time. Please wait a moment and try again later.",
+    }, // message to send when rate limit is exceeded
+  })
+);
 
 // Use the OCR router for handling OCR-related routes
 app.use("/api/", ocrRouter);
