@@ -1,3 +1,5 @@
+import validateImage from "./Utils/validateImage";
+
 // Component for handling image input
 const ImageInput = ({ loading }: { loading: boolean }) => {
   return (
@@ -9,6 +11,9 @@ const ImageInput = ({ loading }: { loading: boolean }) => {
         name="Image"
         id="Image"
         style={{ display: "none" }}
+        onChange={async (e) => {
+          if (validateImage(e.target.files![0]) === 0) return; // Validate the image
+        }}
       />
       <label
         htmlFor="Image"
