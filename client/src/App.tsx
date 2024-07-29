@@ -4,6 +4,7 @@ import ImgPreview from "./Components/ImgPreview";
 import TextDisplay from "./Components/TextDisplay";
 import { useState } from "react";
 import ImageInput from "./Components/ImageInput/ImageInput";
+import Loader from "./Components/Common/Loader";
 
 function App() {
   const [previewUrl, setPreviewUrl] = useState<string | ArrayBuffer | null>(
@@ -15,7 +16,8 @@ function App() {
     <div>
       <ToastContainer position="bottom-right" />
 
-      <ImageInput loading={loading} />
+      <Loader loading={loading} />
+      <ImageInput loading={loading} setLoading={setLoading} />
       <div
         style={{
           display: "grid",

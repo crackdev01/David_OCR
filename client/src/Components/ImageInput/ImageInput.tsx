@@ -1,7 +1,13 @@
 import validateImage from "./Utils/validateImage";
 
 // Component for handling image input
-const ImageInput = ({ loading }: { loading: boolean }) => {
+const ImageInput = ({
+  loading,
+  setLoading,
+}: {
+  loading: boolean;
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
   return (
     <>
       <input
@@ -13,6 +19,7 @@ const ImageInput = ({ loading }: { loading: boolean }) => {
         style={{ display: "none" }}
         onChange={async (e) => {
           if (validateImage(e.target.files![0]) === 0) return; // Validate the image
+          setLoading(true);
         }}
       />
       <label
