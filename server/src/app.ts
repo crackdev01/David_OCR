@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import helmet from "helmet";
+import ocrRouter from "./Routes/ocr";
 
 const app = express();
 
@@ -12,6 +13,9 @@ app.use(helmet());
 
 // Parse incoming JSON requests with a size limit of 50MB
 app.use(express.json({ limit: "50mb" }));
+
+// Use the OCR router for handling OCR-related routes
+app.use("/api/", ocrRouter);
 
 // Handle undefined routes with a 404 error
 app.use("*", (_: express.Request, res: express.Response) =>
